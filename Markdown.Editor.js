@@ -1372,6 +1372,9 @@
         function makeSpritedButtonRow() {
 
             var buttonBar = panels.buttonBar;
+            if (null === buttonBar) {
+                return;
+            }
 
             var normalYShift = "0px";
             var disabledYShift = "-20px";
@@ -1459,8 +1462,12 @@
 
         function setUndoRedoButtonStates() {
             if (undoManager) {
-                setupButton(buttons.undo, undoManager.canUndo());
-                setupButton(buttons.redo, undoManager.canRedo());
+                if (null === buttons.undo) {
+                    setupButton(buttons.undo, undoManager.canUndo());
+                }
+                if (null === buttons.redo) {
+                    setupButton(buttons.redo, undoManager.canRedo());
+                }
             }
         };
 
